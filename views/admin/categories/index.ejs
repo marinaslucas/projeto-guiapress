@@ -1,0 +1,52 @@
+<%- include('../../partials/header'); %>
+<%- include('../../partials/navbar'); %>
+<body>
+    <div class="container">
+        <br>
+        <h2>Categorias</h2>
+
+        <p><a class="btn btn-success" href="/admin/categories/new">Criar nova categoria</a></p>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th><th>Título</th><th>Slug</th><th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <%categories.forEach(category => { %>
+                <tr>
+                    <th><%= category.id %></th><th><%= category.title %></th><th><%= category.slug %></th><th> 
+                        <button class="btn btn-warning">Editar</button>
+                        <form method="post" action="/categories/delete" style="display: inline;" onsubmit="confirmDelete(event, this)"> <!-- display inline serve para impedir pular linha no formulario -->
+                            <input type="hidden" name="id" value="<%= category.id %>">
+                            <button class="btn btn-danger">Deletar</button> <!-- O this passa o elemento HTML que está chamando o evento. É assim que se passa o formulário -->
+                        </form>    
+                    </th>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>    
+</body>
+<%- include('../../partials/footer'); %>
+
+<script> //função para confirmar se quer realmente deletar uma categoria = usar javascript puro
+    function confirmDelete(event, form){ //passei o form como parâmetro usando o this como parâmetro o onsubmit
+        event.preventDefault(); //o método impede que o formulario seja submetido
+        var decision = confirm("Deseja deletar esta categoria?")
+        if (decision){
+            console.log("Deleção confirmada")
+            form.submit();
+        }else{
+            console.log("Deleção abortada")
+        }
+    }
+</script> 
+
+
+
+
+
+
+
+

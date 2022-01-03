@@ -4,21 +4,17 @@ const app = express();
 const bodyParser = require('body-parser')
 const connection = require('./database/database')
 
-//controllers
-const categoriesController = require("./categories/CategoriesController")
-const articlesController = require("./articles/ArticlesController")
-
-//Models:
-const Article = require('./articles/Article')
-const Category = require('./categories/Category')
-
+//view engine
 app.set('view engine', 'ejs');
+
+//Static: express aceitar trabalhar com arquivos estáticos
+app.use(express.static('public'))
 
 //body-parser: extended false quando o objeto de retorno puder ser string ou array. Quando puder ser qualquer coisa ficaria true
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
-//Conexão com o banco:
+//Database: Conexão com o banco:
 connection
     .authenticate()
     .then(() => {
@@ -28,8 +24,13 @@ connection
         console.log(msgErro);
     })
 
-//Static: express aceitar trabalhar com arquivos estáticos
-app.use(express.static('public'))
+//controllers
+const categoriesController = require("./categories/CategoriesController")
+const articlesController = require("./articles/ArticlesController")
+
+//Models:
+const Article = require('./articles/Article')
+const Category = require('./categories/Category')
 
 //rota principal
 app.get('/', (req, res) => {

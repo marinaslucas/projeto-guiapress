@@ -12,6 +12,9 @@ const Article = connection.define("articles", {
     }, slug: {
         type: Sequelize.STRING,
         allowNull: false
+    },  body: {
+        type: Sequelize.TEXT,
+        allowNull: false
     }
 })
 
@@ -19,10 +22,9 @@ const Article = connection.define("articles", {
 Category.hasMany(Article); //uma Categoria tem muitos artigos
 Article.belongsTo(Category); //um Artigo tem apenas uma categoria
 
-
 //O sync com o force true vai criar a tabela toda vez q rodar a aplicação, então só deve ser colocado uma vez para criação da tabela
 /* Article.sync({
     force: true
-}) */
+}); */
 
 module.exports = Article;

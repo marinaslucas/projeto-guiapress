@@ -9,16 +9,12 @@ const Category = connection.define("categories", {
     }, slug: {
         type: Sequelize.STRING,
         allowNull: false
-    },
-    body: {
-        type: Sequelize.TEXT,
-        allowNull: false
     }
 })
 
 //O sync com o force true vai criar a tabela toda vez q rodar a aplicação, então só deve ser colocado uma vez para criação da tabela
 /* Category.sync({
     force: true
-}) */
+})  */ 
 
 module.exports = Category;
