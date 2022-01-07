@@ -13,15 +13,15 @@
                 </tr>
             </thead>
             <tbody>
-                <%categories.forEach(category => { %>
+                <% categories.forEach(category => { %>
                 <tr>
-                    <th><%= category.id %></th><th><%= category.title %></th><th><%= category.slug %></th><th> 
-                        <button class="btn btn-warning">Editar</button>
+                    <td><%= category.id %></td><td><%= category.title %></td><td><%= category.slug %></td><td> 
+                        <a href="/admin/categories/edit/<%= category.id %>"class="btn btn-warning">Editar</a>
                         <form method="post" action="/categories/delete" style="display: inline;" onsubmit="confirmDelete(event, this)"> <!-- display inline serve para impedir pular linha no formulario -->
                             <input type="hidden" name="id" value="<%= category.id %>">
                             <button class="btn btn-danger">Deletar</button> <!-- O this passa o elemento HTML que está chamando o evento. É assim que se passa o formulário -->
                         </form>    
-                    </th>
+                    </td>
                 </tr>
                 <% }) %>
             </tbody>

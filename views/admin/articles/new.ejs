@@ -1,0 +1,46 @@
+<%- include('../../partials/header'); %>
+
+<%- include('../../partials/navbar'); %>
+
+<div class="container">
+    <br>
+    <div class="card"> 
+        <div class="card-header">
+            <h2>Novo artigo</h2>
+        </div>  
+        <div class="card-body">
+            <form method="post" action="/articles/save">
+                <input class="form-control" type="text" name="title" placeholder="Defina o título do artigo">
+                <br>
+                <textarea class="form-control" placeholder="Digite aqui seu artigo" name="body" id="article"></textarea>
+                <br>
+                <label>Categoria:</label>
+                <select name="category" class="form-control">
+                    <% categories.forEach(category => { %>
+                        <option value="<%= category.id %>"> <%= category.title %> </option>
+                    <% }) %>
+                </select>
+                <br>
+                <button class="btn btn-success">Cadastrar</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<%- include('../../partials/footer'); %>
+
+
+<!--Importanto o tiny mce: Preciso também criar um id na textarea onde eu quero utilizar o tinymce. Neste caso, criei o id=article na textarea -->
+<script src="/tinymce/tinymce.min.js"></script>
+
+
+<!-- configurando o tinymce: -->
+<script>
+    tinymce.init({ //consigo instalar plugins também para melhorar a ferramenta
+        language: 'pt_BR',
+        selector:"#article",
+        plugins: [
+            'advlist autolink link image lists print preview hr searchreplace wordcount fullscreen insertdatetime media save table paste emoticons'
+        ]
+    })
+</script>
